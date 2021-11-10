@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<modification>
+		<id>Shipping Data for Consignment Note</id>
+		<version>1.4.0</version>
+		<author>Prorab337</author>
+		<vqmver>2.5.0</vqmver>
+
+		<file name="admin/controller/sale/order.php">
+			<operation>
+				<search position="before"><![CDATA[$this->data['button_invoice']]]></search>
+				<add><![CDATA[
+					/* START Shipping Data */
+					$this->data['heading_cn'] 	   = $this->language->get('heading_cn');
+					$this->data['entry_cn_number'] = $this->language->get('entry_cn_number');
+					/* END Shipping Data */
+				]]></add>
+			</operation>
+			<operation>
+				<search position="before"><![CDATA[public function getForm(]]></search>
+				<add><![CDATA[
+					/* START Shipping Data */
+					public function getShippingData() {
+						$this->load->language('sale/order');
+
+						$data = array();
+
+						if (!empty($this->request->post['selected'])) {
+							$shipping_methods = array('novaposhta', 'ukrposhta');
+
+							$settings = array();
+
+							foreach ($shipping_methods as $shipping_method) {
+								if ($this->config->get($shipping_method . '_status')) {
+									$settings[$shipping_method] = $this->config->get($shipping_method);
+
+									$data['shipping_methods'][$shipping_method]['heading'] = $this->language->get('heading_cn_' . $shipping_method);
+
+									$data['shipping_methods'][$shipping_method]['cn_list'] = array (
+										'text' => $this->language->get('text_cn_list'),
+										'href' => $this->url->link('shipping/' . $shipping_method . '/getCNList', 'token=' . $this->session->data['token'], 'SSL')
+									);
+								} else {
+									unset($shipping_methods[$shipping_method]);
+								}
+							}
+
+							$this->load->model('sale/order');
+
+							$orders = $this->model_sale_order->getOrdersShippingData($this->request->post['selected']);
+
+							foreach ($orders as $order) {
+								foreach ($shipping_methods as $shipping_method) {
+									if (!empty($settings[$shipping_method]['compatible_shipping_method']) && (empty($order['shipping_code']) || in_array($order['shipping_code'], $settings[$shipping_method]['compatible_shipping_method']) || in_array(stristr($order['shipping_code'], '.', true), $settings[$shipping_method]['compatible_shipping_method']))) {
+										if ($order[$shipping_method . '_cn_number']) {
+											unset($data['orders'][$order['order_id']]);
+
+											if ($settings[$shipping_method]['consignment_edit']) {
+												if ($settings[$shipping_method]['consignment_edit_text'][$this->config->get('config_language_id')]) {
+													$text = $settings[$shipping_method]['consignment_edit_text'][$this->config->get('config_language_id')];
+												} else {
+													$text = $this->language->get('text_cn_edit');
+												}
+
+												if ($shipping_method == 'novaposhta') {
+													$cn_id = '&cn_ref=' . $order['novaposhta_cn_ref'];
+												} elseif ($shipping_method == 'ukrposhta') {
+													$cn_id = '&cn_uuid=' . $order['ukrposhta_cn_uuid'];
+												} else {
+													$cn_id = '';
+												}
+
+												$data['orders'][$order['order_id']][$shipping_method]['edit'] = array(
+													'text' => $text,
+													'href' => $this->url->link('shipping/' . $shipping_method . '/getCNForm', 'order_id=' . $order['order_id'] . '&token=' . $this->session->data['token'] . $cn_id, 'SSL')
+												);
+											}
+
+											if ($settings[$shipping_method]['consignment_delete']) {
+												if ($settings[$shipping_method]['consignment_delete_text'][$this->config->get('config_language_id')]) {
+													$text = $settings[$shipping_method]['consignment_delete_text'][$this->config->get('config_language_id')];
+												} else {
+													$text = $this->language->get('text_cn_delete');
+												}
+
+												$data['orders'][$order['order_id']][$shipping_method]['delete'] = array(
+													'text' => $text,
+													'href' => ''
+												);
+											}
+
+											break;
+										} else {
+											if ($settings[$shipping_method]['consignment_create']) {
+												if ($settings[$shipping_method]['consignment_create_text'][$this->config->get('config_language_id')]) {
+													$text = $settings[$shipping_method]['consignment_create_text'][$this->config->get('config_language_id')];
+												} else {
+													$text = $this->language->get('text_cn_create');
+												}
+
+												$data['orders'][$order['order_id']][$shipping_method]['create'] = array(
+													'text' => $text,
+													'href' => $this->url->link('shipping/' . $shipping_method . '/getCNForm', 'order_id=' . $order['order_id'] . '&token=' . $this->session->data['token'], 'SSL')
+												);
+											}
+
+											if ($settings[$shipping_method]['consignment_assignment_to_order']) {
+												if ($settings[$shipping_method]['consignment_assignment_to_order_text'][$this->config->get('config_language_id')]) {
+													$text = $settings[$shipping_method]['consignment_assignment_to_order_text'][$this->config->get('config_language_id')];
+												} else {
+													$text = $this->language->get('text_cn_assignment');
+												}
+
+												$data['orders'][$order['order_id']][$shipping_method]['assignment'] = array(
+													'text' => $text,
+													'href' => ''
+												);
+											}
+										}
+									}
+								}
+							}
+
+							$data['heading_cn'] = $this->language->get('heading_cn');
+							$data['text_cn_list'] = $this->language->get('text_cn_list');
+
+							$data['entry_cn_number'] = $this->language->get('entry_cn_number');
+						}
+
+						if (!empty($this->error['warning'])) {
+							$data['error'] = $this->error['warning'];
+						}
+
+						$this->response->addHeader('Content-Type: application/json');
+						$this->response->setOutput(json_encode($data));
+					}
+					/* END Shipping Data */
+				]]></add>
+			</operation>
+		</file>
+
+		<file name="admin/model/sale/order.php">
+			<operation>
+				<search position="before"><![CDATA[public function getOrderProducts(]]></search>
+				<add><![CDATA[
+					/* START Shipping Data */
+					public function getOrdersShippingData($data = array()) {
+						$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order` WHERE `order_id` IN (" . implode(',', $data) . ")");
+
+						return $query->rows;
+					}
+					/* END Shipping Data */
+				]]></add>
+			</operation>
+		</file>
+
+		<file name="admin/language/english/sale/order.php">
+			<operation>
+				<search position="before"><![CDATA[// Text]]></search>
+				<add><![CDATA[
+					/* START Shipping Data */
+					$_['heading_cn'] 			= 'Consignment note';
+					$_['heading_cn_novaposhta'] = 'Nova Poshta';
+					$_['heading_cn_ukrposhta']  = 'Ukrposhta';
+
+					$_['entry_cn_number'] 		= 'Consignment note number';
+
+					$_['text_cn_list'] 			= 'Consignment note list';
+					$_['text_cn_create'] 		= 'Create';
+					$_['text_cn_edit'] 			= 'Edit';
+					$_['text_cn_delete'] 		= 'Delete';
+					$_['text_cn_assignment']  	= 'Assignment number';
+					/* END Shipping Data */
+				]]></add>
+			</operation>
+		</file>
+
+		<file name="admin/language/russian/sale/order.php">
+			<operation>
+				<search position="before"><![CDATA[// Text]]></search>
+				<add><![CDATA[
+					/* START Shipping Data */
+					$_['heading_cn'] 			= 'Товаро-транспортная накладная';
+					$_['heading_cn_novaposhta'] = 'Новая Почта';
+					$_['heading_cn_ukrposhta']  = 'Укрпочта';
+
+					$_['entry_cn_number'] 		= 'Номер накладной';
+
+					$_['text_cn_list'] 			= 'Список накладных';
+					$_['text_cn_create'] 		= 'Создать';
+					$_['text_cn_edit'] 			= 'Редактировать';
+					$_['text_cn_delete'] 		= 'Удалить';
+					$_['text_cn_assignment']    = 'Присвоить номер';
+					/* END Shipping Data */
+				]]></add>
+			</operation>
+		</file>
+
+		<file name="admin/language/ukrainian/sale/order.php">
+			<operation>
+				<search position="before"><![CDATA[// Text]]></search>
+				<add><![CDATA[
+					/* START Shipping Data */
+					$_['heading_cn'] 			= 'Товарно-транспортна накладна';
+					$_['heading_cn_novaposhta'] = 'Нова Пошта';
+					$_['heading_cn_ukrposhta']  = 'Укрпошта';
+
+					$_['entry_cn_number'] 		= 'Номер накладної';
+
+					$_['text_cn_list'] 			= 'Список накладних';
+					$_['text_cn_create'] 		= 'Створити';
+					$_['text_cn_edit'] 			= 'Редагувати';
+					$_['text_cn_delete'] 		= 'Видалити';
+					$_['text_cn_assignment']  	= 'Присвоїти номер';
+					/* END Shipping Data */
+				]]></add>
+			</operation>
+		</file>
+
+		<file name="admin/language/russian/russian.php,admin/language/english/english.php,admin/language/ukrainian/ukrainian.php">
+			<operation>
+				<search position="after"><![CDATA[// Locale]]></search>
+				<add><![CDATA[
+					/* START Shipping Data */
+					$_['datetime_format'] = 'd.m.Y H:i';
+					/* END Shipping Data */
+				]]></add>
+			</operation>
+		</file>
+
+  		<file name="admin/view/template/sale/order_list.tpl">
+    		<operation>
+    			<search position="before"><![CDATA[<?php echo $footer; ?>]]></search>
+    			<add><![CDATA[
+					<!-- START Shipping Data -->
+					<input type="hidden" name="cn_shipping_method" value="" id="cn_shipping_method" />
+					<input type="hidden" name="cn_order_id" value="" id="cn_order_id" />
+
+					<style>
+						.cn-dropdown {
+							position: relative;
+							display: inline-block;
+						}
+
+						.cn-dropdown-content {
+							display: none;
+							position: absolute;
+							left: auto;
+    						right: 0;
+							background-color: #f9f9f9;
+							min-width: 160px;
+							box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+							padding: 7px 7px;
+							z-index: 1;
+						}
+
+						.cn-dropdown:hover .cn-dropdown-content {
+							display: block;
+						}
+
+						.cn-dropdown-btn {
+							background-color: #4CAF50;
+							color: white;
+							padding: 16px;
+							font-size: 16px;
+							border: none;
+							cursor: pointer;
+						}
+
+						.cn-dropdown-content p {
+							margin: 3px;
+						}
+
+						a.red-button, .list a.red-button {
+							text-decoration: none;
+							color: #FFF;
+							display: inline-block;
+							padding: 5px 15px 5px 15px;
+							background: red;
+							-webkit-border-radius: 10px 10px 10px 10px;
+							-moz-border-radius: 10px 10px 10px 10px;
+							-khtml-border-radius: 10px 10px 10px 10px;
+							border-radius: 10px 10px 10px 10px;
+						}
+					</style>
+
+					<script type="text/javascript"><!--
+						function deleteCN(self, shipping_method) {
+							var post_data = 'order_id=' + $(self).parents('tr').find('input[name^="selected"]').val();
+
+							$.ajax( {
+								url: 'index.php?route=shipping/' + shipping_method + '/deleteCNFromOrder&token=<?php echo $token; ?>',
+								type: 'POST',
+								data: post_data,
+								dataType: 'json',
+								beforeSend: function () {
+									$('body').fadeTo('fast', 0.7);
+								},
+								complete: function () {
+									$('body').fadeTo('fast', 1)
+								},
+								success: function(json) {
+									if(json['error']) {
+										alert(json['error']);
+									}
+
+									if (json['success']) {
+										alert(json['success']);
+										location.reload();
+									}
+								},
+								error: function (jqXHR, textStatus, errorThrown) {
+									console.log(textStatus);
+								}
+							} );
+						}
+
+						function assignmentCN(self, shipping_method) {
+							if (typeof(self) !== 'undefined') {
+								$('#cn_order_id').val($(self).parents('tr').find('input[name^="selected"]').val());
+							}
+
+							if (shipping_method) {
+								$('#cn_shipping_method').val(shipping_method);
+							}
+
+							var	cn_number = prompt('<?php echo $entry_cn_number; ?>');
+
+							if (cn_number != null) {
+								var post_data = 'order_id=' + $('#cn_order_id').val() + '&cn_number=' + cn_number;
+
+								$.ajax( {
+									url: 'index.php?route=shipping/' + $('#cn_shipping_method').val() + '/addCNToOrder&token=<?php echo $token; ?>',
+									type: 'POST',
+									data: post_data,
+									dataType: 'json',
+									beforeSend: function () {
+										$('body').fadeTo('fast', 0.7);
+									},
+									complete: function () {
+										$('body').fadeTo('fast', 1)
+									},
+									success: function(json) {
+										if(json['error']) {
+											alert(json['error']);
+										}
+
+										if (json['success']) {
+											alert(json['success']);
+											location.reload();
+										}
+									},
+									error: function (jqXHR, textStatus, errorThrown) {
+										console.log(textStatus);
+									}
+								} );
+							}
+						}
+
+						$(function() {
+							var post_data = $('input[name^="selected"]');
+
+							$.ajax( {
+								url: 'index.php?route=sale/order/getShippingData&token=<?php echo $token; ?>',
+								type: 'POST',
+								data: post_data,
+								dataType: 'json',
+								success: function(json) {
+									if(json['error']) {
+										alert(json['error']);
+									}
+
+									if (json instanceof Object) {
+										if (json['shipping_methods']) {
+											var btn_l = '<div class="cn-dropdown"><a class="button"><img src="view/image/log.png" weight="12px" height="12px"></a><div class="cn-dropdown-content">';
+
+											for (var i in json['shipping_methods']) {
+												btn_l += '<p>' + json['shipping_methods'][i]['heading'] + '</p>';
+
+												if (json['shipping_methods'][i]['cn_list']) {
+													btn_l += '<p><a href="' + json['shipping_methods'][i]['cn_list']['href'] + '">' + json['shipping_methods'][i]['cn_list']['text'] + '</a></p>';
+												}
+
+												btn_l += '<hr>';
+											}
+
+											btn_l += '</div></div>';
+
+											$('div.buttons').prepend(btn_l);
+										}
+
+										for (var i in json['orders']) {
+											var
+												f = false,
+												btn_o = '<div class="cn-dropdown"><a class="button" id="button-cn-' + i + '"><img src="view/image/order.png" weight="12px" height="12px"></a><div class="cn-dropdown-content">';
+
+											btn_o += '<p>' + json['heading_cn'] + '</p>';
+											btn_o += '<hr>';
+
+											for (var ii in json['orders'][i]) {
+												btn_o += '<p>' + json['shipping_methods'][ii]['heading'] + '</p>';
+
+												if (json['orders'][i][ii]['create']) {
+													btn_o += '<p><a href="' + json['orders'][i][ii]['create']['href'] + '">' + json['orders'][i][ii]['create']['text'] + '</a></p>';
+												}
+
+												if (json['orders'][i][ii]['edit']) {
+													f = true;
+													btn_o += '<p><a href="' + json['orders'][i][ii]['edit']['href'] + '">' + json['orders'][i][ii]['edit']['text'] + '</a></p>';
+												}
+
+												if (json['orders'][i][ii]['delete']) {
+													f = true;
+													btn_o += '<p><a style="cursor: pointer;" onclick="deleteCN(this, \'' + ii + '\');">' + json['orders'][i][ii]['delete']['text'] + '</a></p>';
+												}
+
+												if (json['orders'][i][ii]['assignment']) {
+													btn_o += '<p><a style="cursor: pointer;" onclick="assignmentCN(this, \'' + ii + '\');">' + json['orders'][i][ii]['assignment']['text'] + '</a></p>';
+												}
+
+												btn_o += '<hr>';
+											}
+
+											btn_o += '</div></div> ';
+
+											$('input[value="' + i + '"]').parents('tr').find('td:last').prepend(btn_o);
+
+											if (!f) {
+												$('input[value="' + i + '"]').parents('tr').find('[id^="button-cn"]').toggleClass('red-button button');
+											}
+										}
+									}
+								},
+								error: function (jqXHR, textStatus, errorThrown) {
+									console.log(textStatus);
+								}
+							} );
+						} );
+					//--></script>
+					<!-- END Shipping Data -->
+    			]]></add>
+    		</operation>
+  		</file>
+
+		<file name="admin/view/template/sale/order_info.tpl">
+			<operation>
+				<search position="before"><![CDATA[<?php echo $footer; ?>]]></search>
+				<add><![CDATA[
+					<!-- START Shipping Data -->
+					<input type="hidden" name="cn_shipping_method" value="" id="cn_shipping_method" />
+
+					<style>
+						.cn-dropdown {
+							position: relative;
+							display: inline-block;
+						}
+
+						.cn-dropdown-content {
+							display: none;
+							position: absolute;
+							left: auto;
+    						right: 0;
+							background-color: #f9f9f9;
+							min-width: 160px;
+							box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+							padding: 7px 7px;
+							z-index: 1;
+						}
+
+						.cn-dropdown:hover .cn-dropdown-content {
+							display: block;
+						}
+
+						.cn-dropdown-btn {
+							background-color: #4CAF50;
+							color: white;
+							padding: 16px;
+							font-size: 16px;
+							border: none;
+							cursor: pointer;
+						}
+
+						.cn-dropdown-content p {
+							margin: 3px;
+						}
+
+						a.red-button, .list a.red-button {
+							text-decoration: none;
+							color: #FFF;
+							display: inline-block;
+							padding: 5px 15px 5px 15px;
+							background: red;
+							-webkit-border-radius: 10px 10px 10px 10px;
+							-moz-border-radius: 10px 10px 10px 10px;
+							-khtml-border-radius: 10px 10px 10px 10px;
+							border-radius: 10px 10px 10px 10px;
+						}
+					</style>
+
+					<script type="text/javascript"><!--
+						function deleteCN(self, shipping_method) {
+							var post_data = 'order_id=<?php echo $order_id; ?>';
+
+							$.ajax( {
+								url: 'index.php?route=shipping/' + shipping_method + '/deleteCNFromOrder&token=<?php echo $token; ?>',
+								type: 'POST',
+								data: post_data,
+								dataType: 'json',
+								beforeSend: function () {
+									$('body').fadeTo('fast', 0.7);
+								},
+								complete: function () {
+									$('body').fadeTo('fast', 1)
+								},
+								success: function(json) {
+									if(json['error']) {
+										alert(json['error']);
+									}
+
+									if (json['success']) {
+										alert(json['success']);
+										location.reload();
+									}
+								},
+								error: function (jqXHR, textStatus, errorThrown) {
+									console.log(textStatus);
+								}
+							} );
+						}
+
+						function assignmentCN(self, shipping_method) {
+							if (shipping_method) {
+								$('#cn_shipping_method').val(shipping_method);
+							}
+
+							var	cn_number = prompt('<?php echo $entry_cn_number; ?>');
+
+							if (cn_number != null) {
+								var post_data = 'order_id=<?php echo $order_id; ?>&cn_number=' + cn_number;
+
+								$.ajax( {
+									url: 'index.php?route=shipping/' + $('#cn_shipping_method').val() + '/addCNToOrder&token=<?php echo $token; ?>',
+									type: 'POST',
+									data: post_data,
+									dataType: 'json',
+									beforeSend: function () {
+										$('body').fadeTo('fast', 0.7);
+									},
+									complete: function () {
+										$('body').fadeTo('fast', 1)
+									},
+									success: function(json) {
+										if(json['error']) {
+											alert(json['error']);
+										}
+
+										if (json['success']) {
+											alert(json['success']);
+											location.reload();
+										}
+									},
+									error: function (jqXHR, textStatus, errorThrown) {
+										console.log(textStatus);
+									}
+								} );
+							}
+						}
+
+						$(function() {
+							var post_data = 'selected[]=<?php echo $order_id; ?>';
+
+							$.ajax( {
+								url: 'index.php?route=sale/order/getShippingData&token=<?php echo $token; ?>',
+								type: 'POST',
+								data: post_data,
+								dataType: 'json',
+								success: function(json) {
+									if(json['error']) {
+										alert(json['error']);
+									}
+
+									if (json instanceof Object) {
+										for (var i in json['orders']) {
+											var
+												f = false,
+												btn_o = '<div class="cn-dropdown"><a class="button" id="button-cn-' + i + '"><img src="view/image/order.png" weight="12px" height="12px"></a><div class="cn-dropdown-content">';
+
+											btn_o += '<p>' + json['heading_cn'] + '</p>';
+											btn_o += '<hr>';
+
+											for (var ii in json['orders'][i]) {
+												btn_o += '<p>' + json['shipping_methods'][ii]['heading'] + '</p>';
+
+												if (json['orders'][i][ii]['create']) {
+													btn_o += '<p><a href="' + json['orders'][i][ii]['create']['href'] + '">' + json['orders'][i][ii]['create']['text'] + '</a></p>';
+												}
+
+												if (json['orders'][i][ii]['edit']) {
+													f = true;
+													btn_o += '<p><a href="' + json['orders'][i][ii]['edit']['href'] + '">' + json['orders'][i][ii]['edit']['text'] + '</a></p>';
+												}
+
+												if (json['orders'][i][ii]['delete']) {
+													f = true;
+													btn_o += '<p><a style="cursor: pointer;" onclick="deleteCN(this, \'' + ii + '\');">' + json['orders'][i][ii]['delete']['text'] + '</a></p>';
+												}
+
+												if (json['orders'][i][ii]['assignment']) {
+													btn_o += '<p><a style="cursor: pointer;" onclick="assignmentCN(this, \'' + ii + '\');">' + json['orders'][i][ii]['assignment']['text'] + '</a></p>';
+												}
+
+												btn_o += '<hr>';
+											}
+
+											btn_o += '</div></div> ';
+
+											$('div.buttons:last').prepend(btn_o);
+
+											if (!f) {
+												$('div.buttons').find('[id^="button-cn"]').toggleClass('red-button button');
+											}
+										}
+									}
+								},
+								error: function (jqXHR, textStatus, errorThrown) {
+									console.log(textStatus);
+								}
+							} );
+						} );
+					//--></script>
+					<!-- END Shipping Data -->
+				]]></add>
+			</operation>
+		</file>
+
+		<file name="system/library/length.php">
+			<operation>
+				<ignoreif><![CDATA[function getUnit(]]></ignoreif>
+				<search position="before"><![CDATA[ublic function format]]></search>
+				<add><![CDATA[
+					/* START Shipping Data */
+					public function getUnit($length_class_id) {
+						if (isset($this->lengths[$length_class_id])) {
+							return $this->lengths[$length_class_id]['unit'];
+						} else {
+							return '';
+						}
+					}
+					/* END Shipping Data */
+				]]></add>
+			</operation>
+		</file>
+  
+	</modification>

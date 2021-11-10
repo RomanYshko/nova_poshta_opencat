@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+    	<meta charset="utf-8">
+    	<title>Модуль доставки "Новая Почта API" для OpenCart</title>
+    	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+    	<meta content="Модуль доставки Новая Почта API для OpenCart" name="description">
+    	<meta content="GMaks" name="author">
+    	<link href="https://oc-max.com/docs/novaposhta/images/ru/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.0/jquery.mark.min.js" integrity="sha256-1iYR6/Bs+CrdUVeCpCmb4JcYVWvvCUEgpSU7HS5xhsY=" crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+    </head>
+
+    <body style="padding-top:70px">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+                <a class="navbar-brand" href="#"><i class="fab fa-opencart"></i> «Новая Почта API» v. 3.5.0 - модуль доставки  для OpenCart</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://oc-max.com" target="_blank">OC Max</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="nav-decsciption" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Описание</a>
+                            <div class="dropdown-menu" aria-labelledby="nav-decsciption">
+                                <a class="dropdown-item link-goto" href="#opportunities">Функциональные возможности</a>
+                                <a class="dropdown-item link-goto" href="#languages">Поддерживаемые языки</a>
+                                <a class="dropdown-item link-goto" href="#compatibility">Совместимость</a>
+                                <a class="dropdown-item link-goto" href="#license">Лицензия</a>
+                                <a class="dropdown-item link-goto" href="#requirements">Требования</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="nav-instruction" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Инструкция</a>
+                            <div class="dropdown-menu" aria-labelledby="nav-instruction">
+                                <a class="dropdown-item link-goto" href="#installation">Установка</a>
+                                <a class="dropdown-item link-goto" href="#setting">Настройка</a>
+                                <a class="dropdown-item link-goto" href="#update">Обновление</a>
+                                <a class="dropdown-item link-goto" href="#remove">Удаление</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="nav-support" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Поддержка</a>
+                            <div class="dropdown-menu" aria-labelledby="nav-support">
+                                <a class="dropdown-item link-goto" href="#faq">Вопросы/Ответы</a>
+                                <a class="dropdown-item link-goto" href="#changelog">Список изменений</a>
+                                <a class="dropdown-item link-goto" href="#contacts">Контакты</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="form-inline my-2 my-lg-0">
+                        <input id="input-text_to_find" class="form-control mr-sm-2" type="search" placeholder="Что ищем?" aria-label="Search">
+                        <button id="button-search" class="btn btn-outline-primary my-2 my-sm-0">Поиск</button>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="jumbotron">
+                <h1 class="display-3">«Новая Почта API» - модуль доставки  для OpenCart</h1>
+                <p class="lead">
+                    Данный модуль по праву считается лучшим решением для организации доставки Новой Почтой в Вашем интернет-магазине. Дополнение решает практически все задачи, которые возникают при работе с Новой Почтой и является отличным помощником на любом этапе работы с заказами. Кроме стандартных функций модуля доставки имеются инструменты для работы с <span class="badge badge-danger">Экспресс Накладными</span>. Также доступны две функции калькулятора: <span class="badge badge-success">расчет стоимости</span> и <span class="badge badge-success">срока доставки</span>. Все расчеты происходят при помощи <span class="badge badge-light">API</span>, что гарантирует получение самых точных данных.
+                </p>
+                <p class="lead">
+                    Дополнение также имеет ряд функций, которые за Вас в автоматическом режиме выполняют ежедневную рутинную работу: <span class="badge badge-success">рассылка уведомлений</span> с номером накладной, <span class="badge badge-success">смена статусов заказа</span>, <span class="badge badge-success">напоминание о не забранных посылках</span> и т.д.
+                </p>
+                <p class="lead">
+                    Данный модуль не перезаписывает и не удаляет стандартные файлы и таблицы базы OpenCart. В работе модуля используется <span class="badge badge-light">API «Новой Почты»</span>, что позволяет всегда иметь актуальную информацию о городах, отделениях, отправлениях и т.д., а также взаимодействовать непосредственно с Новой Почтой используя большое количество готовых решений, предоставляемых компанией. И это не все возможности модуля, функционал постоянно расширяется и улучшается. Приобретая модуль Вы будете экономить уйму времени и значительные денежные средства на обработке заказов и разработке аналогичного функционала.
+                </p>
+                <hr class="my-4">
+                <p>Дополнение является авторской разработкой и защищено соответствующими правами</p>
+                <p>По ссылкам, предоставленным ниже, можно перейти на демонстрационный сайт. Для доступа в админ-панель используйте следующие данные: логин и пароль - <span class="badge badge-secondary">demo</span></p>
+                <p class="lead text-center">
+                    <a class="btn btn-primary btn-lg" href="https://shipping.oc-max.com/admin/index.php?route=extension/shipping/novaposhta" role="button" target="_blank">Панель администратора</a>
+                    <a class="btn btn-primary btn-lg" href="https://shipping.oc-max.com/admin/index.php?route=extension/shipping/novaposhta/getCNForm&order_id=1" role="button" target="_blank">Создание/редактирование накладной</a>
+                    <a class="btn btn-primary btn-lg" href="https://shipping.oc-max.com/admin/index.php?route=extension/shipping/novaposhta/getCNList&filter_departure_date_from=09.04.2019" role="button" target="_blank">Список накладных</a>
+                    <a class="btn btn-primary btn-lg" href="https://shipping.oc-max.com/" role="button" target="_blank">Магазин</a>
+                </p>
+            </div>
+
+            <h2>
+                Описание
+                <small class="text-muted">(основная информация)</small>
+            </h2>
+
+            <div class="card bg-light mb-3" id="opportunities">
+                <div class="card-header">Функциональные возможности</div>
+                <div class="card-body">
+                    <h6>Основные возможности</h6>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-wrench fa-fw"></i> большое количество настроек</li>
+                        <li><i class="fas fa-sync fa-fw"></i> удобное ручное и автоматическое обновление городов, отделений и другой справочной информации</li>
+                        <li><i class="far fa-edit fa-fw"></i> создание, редактирование и удаление накладных</li>
+                        <li><i class="far fa-file-alt fa-fw"></i> максимальное заполнение формы накладной в автоматическом режиме</li>
+                        <li><i class="fas fa-print fa-fw"></i> скачивание, настройка печати, печать накладных и маркировок</li>
+                        <li><i class="far fa-list-alt fa-fw"></i> просмотр списка накладных непосредственно в админ-панели</li>
+                        <li><i class="fas fa-binoculars fa-fw"></i> автоматическое отслеживание отправлений, смена статусов заказа и отправка уведомлений</li>
+                        <li><i class="far fa-money-bill-alt fa-fw"></i> самый точный предварительный расчет стоимости доставки</li>
+                        <li><i class="far fa-clock fa-fw"></i> расчет ориентировочного срока доставки</li>
+                        <li><i class="fas fa-archive fa-fw"></i> автоматическое определение и учет типа упаковки</li>
+                        <li><i class="fas fa-cubes fa-fw"></i> автоматический расчет параметров отправления</li>
+                        <li><i class="fas fa-map-marker fa-fw"></i> выбор и поиск городов, отделений. Возможность задать дополнительные поля для адресной доставки</li>
+                    </ul>
+                    <div id="opportunities-admin-accordion" data-children=".item">
+                        <div class="item">
+                            <a data-toggle="collapse" data-parent="#opportunities-admin-accordion" href="#opportunities-admin-accordion-1" aria-expanded="true" aria-controls="opportunities-admin-accordion-1">подробнее...</a>
+                            <div id="opportunities-admin-accordion-1" class="collapse" role="tabpanel">
+                                <h6>Возможности для администратора</h6>
+                                <ul>
+                                    <li>поддержка мультимагазинов</li>
+                                    <li>загрузка базовых настроек</li>
+                                    <li>экспорт/импорт настроек</li>
+                                    <li>ввод ключа API «Новой Почты»</li>
+                                    <li>режим отладки</li>
+                                    <li>загрузка логотипа транспортной компании</li>
+                                    <li>выбор места отображения логотипа</li>
+                                    <li>настройка cURL тайм-аут подключения и выполнения</li>
+                                    <li>настройки доставки в отделение, на адрес и в почтомат:
+                                        <ul>
+                                            <li>вкл/выкл способ доставки</li>
+                                            <li>редактируемое и мультиязычное название доставки</li>
+                                            <li>выбор географической зоны</li>
+                                            <li>выбор налогового класса</li>
+                                            <li>возможность задать минимальную сумму заказа при которой доставка будет доступной</li>
+                                            <li>возможность задать максимальную сумму заказа при которой доставка будет доступной</li>
+                                            <li>возможность задать минимальную сумму заказа при которой доставка будет бесплатной</li>
+                                            <li>редактируемый и мультиязычный текст бесплатной доставки</li>
+                                            <li>вкл/выкл расчет стоимости доставки</li>
+                                            <li>вкл/выкл API расчет стоимости доставки (используемая информация для расчета: персональные настройки отправителя, город отправителя и получателя, тип доставки, стоимость товара, вес товара, объём товара, упаковка)</li>
+                                            <li>вкл/выкл тарифный расчет стоимости доставки (может использоваться как самостоятельно, так и в случае недоступности API)</li>
+                                            <li>вкл/выкл расчет срока доставки в днях (используемая информация для расчета: город отправителя и получателя, тип доставки)</li>
+                                            <li>вкл/выкл фильтр отделений по весу</li>
+                                            <li>выбор типа отделения</li>
+                                        </ul>
+                                    </li>
+                                    <li>настройка тарифного расчета</li>
+                                    <li>работа с базой:
+                                        <ul>
+                                            <li>загрузка/обновление областей Украины</li>
+                                            <li>загрузка/обновление городов компании «Новая Почта»</li>
+                                            <li>загрузка/обновление отделений компании «Новая Почта»</li>
+                                            <li>загрузка/обновление справочников компании «Новая Почта»</li>
+                                        </ul>
+                                    </li>
+                                    <li>настройка параметров отправителя: отправитель, контактное лицо, область, город и адрес отправки</li>
+                                    <li>настройка параметров получателя: получатель, контактное лицо, телефон, область, город, отделение, адрес, улица, дом, квартира, желаемые дата и время доставки</li>
+                                    <li>настройка параметров отправления:
+                                        <ul>
+                                            <li>вкл/выкл автоопределение типа отправления (документ, посылка, груз)</li>
+                                            <li>выбор типа отправления по умолчанию</li>
+                                            <li>вкл/выкл учет объёма</li>
+                                            <li>выбор варианта учета объёма отправления</li>
+                                            <li>возможность задать количество мест по умолчанию</li>
+                                            <li>выбор составляющих для объявленной стоимости отправления</li>
+                                            <li>возможность задать объявленную стоимость по умолчанию</li>
+                                            <li>возможность задать описание отправления по умолчанию</li>
+                                            <li>возможность задать дополнительную информацию об отправлении в виде шаблона с использованием макросов заказа и товара</li>
+                                            <li>выбор способа применения параметров по умолчанию</li>
+                                            <li>возможность задать вес по умолчанию</li>
+                                            <li>возможность задать размеры по умолчанию</li>
+                                            <li>возможность задать допуски к размерам отправления</li>
+                                            <li>вкл/выкл учет упаковки</li>
+                                            <li>выбор типа упаковки</li>
+                                            <li>вкл/выкл автоопределение типа упаковки</li>
+                                        </ul>
+                                    </li>
+                                    <li>настройка параметров оплаты:
+                                        <ul>
+                                            <li>выбор плательщика доставки по умолчанию</li>
+                                            <li>выбор формы оплаты по умолчанию</li>
+                                            <li>выбор метода оплаты для наложенного платежа</li>
+                                            <li>выбор плательщика обратной доставки по умолчанию</li>
+                                            <li>выбор способа получения денежного перевода</li>
+                                            <li>выбор платежной карты по умолчанию</li>
+                                            <li>выбор составляющих для контроля оплаты</li>
+                                        </ul>
+                                    </li>
+                                    <li>настройка интеграции ТТН:
+                                        <ul>
+                                            <li>вкл/выкл отображение всех накладных аккаунта</li>
+                                            <li>выбор отображаемой информации в списке накладных</li>
+                                            <li>настройка печати</li>
+                                            <li>выбор совместимого способа доставки для создания накладных</li>
+                                            <li>вкл/выкл создание, редактирование, удаление и присвоения накладной в заказе</li>
+                                            <li>возможность задать мультиязычные названия пунктов меню для работы с накладными в заказе</li>
+                                        </ul>
+                                    </li>
+                                    <li>задания Cron:
+                                        <ul>
+                                            <li>возможность задать ключ безопасности выполнения Cron команд</li>
+                                            <li>автоматическое обновление базы данных модуля (области, города, отделения, справочники)</li>
+                                            <li>автоматическое отслеживание отправлений, смена статуса заказа и отправка уведомлений</li>
+                                            <li>выбор статусов заказа, для которых необходимо отслеживание</li>
+                                            <li>настройка зависимостей для каждого статуса отправления и статуса заказа в магазине</li>
+                                            <li>возможность задать задержку выполнения по каждому статусу отправления</li>
+                                            <li>вкл/выкл уведомления для администратора и покупателя</li>
+                                            <li>возможность задать мультиязычный шаблон сообщения для e-mail и sms уведомлений используя макросы заказа, товара и накладной</li>
+                                        </ul>
+                                    </li>
+                                    <li>и другие стандартные опции модуля доставки</li>
+                                </ul>
+                                <h6>Возможности для работы с накладными</h6>
+                                <p class="mb-3">
+                                    При просмотре заказа в админ-панели, если клиент выбрал совместимый способ доставки, появляется кнопка для работы с накладной. Возможно создать накладную на основе заказа или присвоить уже существующую. При переходе к созданию, модуль максимально заполняет форму в автоматическом режиме. Если для просматриваемого заказа накладная уже создана, то будет доступен пункт редактирования и удаления. Также при просмотре заказов можно перейти к списку всех накладных. Доступные функциональности:
+                                </p>
+                                <ul>
+                                    <li>создание, редактирование и удаление накладной</li>
+                                    <li>настройка печати накладных</li>
+                                    <li>скачивание накладной и маркировок в формате PDF для одного или нескольких заказов</li>
+                                    <li>печать в браузере накладной и маркировок для одного или нескольких заказов</li>
+                                    <li>просмотр накладных по числам отправки с возможностью фильтра по типу и номеру</li>
+                                    <li>автоматическое заполнение информации отправителя согласно выбранным настройкам модуля с возможностью смены данных непосредственно перед созданием накладной</li>
+                                    <li>автоматическое заполнении параметров получателя согласно данным из заказа, в том числе доступны следующие функции:
+                                        <ul>
+                                            <li>выбор типа доставки (отделение, адрес и почтомат)</li>
+                                            <li>поиск получателей</li>
+                                            <li>выбор области</li>
+                                            <li>поиск города, населенного пункта</li>
+                                            <li>поиск отделения</li>
+                                            <li>поиск улицы</li>
+                                            <li>ввод номера дома и квартиры</li>
+                                        </ul>
+                                    </li>
+                                    <li>автоматическое заполнение параметров отправления:
+                                        <ul>
+                                            <li>тип</li>
+                                            <li>Штрих-код redBOX</li>
+                                            <li>вес</li>
+                                            <li>общий объем и габариты</li>
+                                            <li>объемный вес</li>
+                                            <li>количество мест с возможностью указать параметры каждого места отправления</li>
+                                            <li>объявленная стоимость с возможностью корректировки составляющих</li>
+                                            <li>описание</li>
+                                        </ul>
+                                    </li>
+                                    <li>автоматическое заполнение параметров оплаты:
+                                        <ul>
+                                            <li>плательщик доставки</li>
+                                            <li>выбор третьего лица</li>
+                                            <li>форма оплаты</li>
+                                            <li>обратная доставка</li>
+                                            <li>сумма обратной доставки, если выбран наложенный платеж</li>
+                                            <li>плательщик обратной доставки</li>
+                                            <li>способ получения денежного перевода</li>
+                                            <li>выбор карты для получения денежного перевода</li>
+                                            <li>контроль оплаты</li>
+                                        </ul>
+                                    </li>
+                                    <li>дополнительные параметры отправления:
+                                        <ul>
+                                            <li>выбор даты отправки</li>
+                                            <li>выбор желаемой даты доставки</li>
+                                            <li>выбор желаемого времени доставки</li>
+                                            <li>заполнение поля "Внутренний номер заказа клиента"</li>
+                                            <li>ввод номера упаковки</li>
+                                            <li>заполнение поля дополнительной информации об отправлении</li>
+                                            <li>подъем на этаж</li>
+                                            <li>лифт</li>
+                                        </ul>
+                                    </li>
+                                    <li>поля автоматически, по мере возможности, заполняются или выбираются модулем согласно настроек</li>
+                                    <li>валидация полей во время редактирования и перед передачей данных на сервер почтовой компании</li>
+                                    <li>автоматическая проверка существования получателя и контактного лица в базе получателей, если не будут найдены, то создадутся новые</li>
+                                    <li>автоматическая корректировка контактного лица</li>
+                                    <li>автоматический поиск адресов получателя и создание новых в случае необходимости</li>
+                                    <li>подсветка распечатанных и удаленных накладных в списке</li>
+                                </ul>
+                                <p class="mb-3">
+                                    При успешном создании или редактировании будет выполнена переадресация к созданной накладной и ее подсветкой в общем списке.
+                                </p>
+                                <h6>Возможности для клиента</h6>
+                                <ul>
+                                    <li>выбор типа доставки:
+                                        <ul>
+                                            <li>доставка в отделение</li>
+                                            <li>доставка курьером на адрес</li>
+                                            <li>доставка в почтомат</li>
+                                        </ul>
+                                    </li>
+                                    <li>выбор города получения:
+                                        <ul>
+                                            <li>выпадающий список</li>
+                                            <li>поиск по названию города</li>
+                                        </ul>
+                                    </li>
+                                    <li>выбор отделения или почтомата:
+                                        <ul>
+                                            <li>выпадающий список</li>
+                                            <li>поиск по названию, адресу или номеру отделения</li>
+                                        </ul>
+                                    </li>
+                                    <li>указание адреса для курьерской доставки</li>
+                                    <li>указание желаемой даты доставки</li>
+                                    <li>указание желаемого времени доставки</li>
+                                    <li>информация о стоимости доставки</li>
+                                    <li>информация о сроке доставки</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card bg-light mb-3" id="languages">
+                <div class="card-header">Поддерживаемые языки</div>
+                <div class="card-body">
+                    <ul>
+                        <li>украинский</li>
+                        <li>русский</li>
+                        <li>английский</li>
+                    </ul>
+                    <p>В некоторых методах API заявлена поддержка украинского, русского и английского языков. На практике же реализована 100% поддержка только украинского языка. Названия городов и отделений Новой Почты доступны на украинском и русском языках. Модуль автоматически показывает нужный перевод в зависимости от настроек OpenCart или предпочтений покупателя во время оформления заказа.
+                    </p>
+                </div>
+            </div>
+            <div class="card bg-light mb-3" id="compatibility">
+                <div class="card-header">Совместимость</div>
+                <div class="card-body">
+                    <ul>
+                        <li>OpenCart v. 1.5.Х.Х, 2.X.X.Х, 3.Х.Х.Х (также сборки на базе OpenCart соответствующих версий)</li>
+                        <li>формы заказа: <a href="https://opencartforum.com/files/file/324-modul-simple-uproschennaya-registraciya-i-zakaz/" role="button" target="_blank">Simple checkout & registration (максимальный функционал)</a>, стандартное оформление заказов, Ajax Quick Checkout, Journal Quick Checkout, Fast Order, Quick checkout, Revolution Checkout, Uni Checkout (только выбор города и отделения)</li>
+                        <li>модули отправки уведомлений: стандартная отправка e-mail, <a href="https://opencartforum.com/files/file/4059-ochelp-sms-uvedomleniya-dlya-admina-klienta-opencart-2x/" role="button" target="_blank">OCHELP - СМС уведомления для админа, клиента</a>, <a href="https://opencartforum.com/files/file/3550-smsfly-order" role="button" target="_blank">SmsFly order</a></li>
+                        <li>редакторы заказов: OrderPro - Расширенный редактор заказа</li>
+                    </ul>
+                    <p>
+                    	Возможно потребуется адаптация для конкретных версий. Адаптацию для других модулей и шаблонов выполним <span class="badge badge-success">по запросу за ДОПОЛНИТЕЛЬНУЮ ПЛАТУ</span>.
+                    </p>
+                </div>
+            </div>
+            <div class="card bg-light mb-3" id="license">
+                <div class="card-header">Лицензия</div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li><i class="far fa-money-bill-alt"></i> приобретая дополнение Вы получаете пожизненный доступ к бесплатным обновлениям и бесплатную техническую поддержку в течении года</li>
+                        <li><i class="fas fa-key"></i> лицензия действует только на один домен и на все его поддомены, и тестовые сайты</li>
+                        <li><i class="far fa-life-ring"></i> информация о порядке получения лицензии доступна после установки модуля</li>
+                        <li><i class="far fa-clock"></i> активация лицензии происходит в течении нескольких часов после покупки</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card bg-light mb-3" id="requirements">
+                <div class="card-header">Требования</div>
+                <div class="card-body">
+                    <ul>
+                        <li>ionCube Loader версии 5.0 и выше</li>
+                        <li>PHP библиотека cURL</li>
+                        <li>PHP версии 5.3 и выше</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2>
+                Инструкция
+                <small class="text-muted">(установка, настройка, обновление и удаление)</small>
+            </h2>
+
+            <div class="card bg-light mb-3" id="installation">
+                <div class="card-header">Установка</div>
+                <div class="card-body">
+                	<div class="alert alert-danger" role="alert">
+                    	<i class="fas fa-exclamation-triangle"></i> Перед установкой на работающем интернет-магазине рекомендуем выполнить установку и тестирование модуля на тестовом сайте или поддомене!
+                    </div>
+                    <div class="alert alert-warning" role="alert">
+                    	<i class="fas fa-forward"></i> Выполняйте все действия пошагово придерживаясь последовательности!
+                    </div>
+                    <div class="alert alert-info" role="alert">
+                        <i class="far fa-hand-point-right"></i> Чтобы не тратить время, свое и разработчика, внимательно прочитайте инструкцию. Если возникли проблемы во время установки модуля или в процессе использования - можно воспользоваться разделом <a href="#faq" class="badge badge-primary link-goto">Вопросы/Ответы</a>, возможно там уже есть решение Вашей проблемы.
+                    </div>
+                    <ol>
+                        <li>
+                        	Загрузить содержимое папки <span class="badge badge-info">upload</span> в корень сайта используя FTP менеджер
+                        </li>
+                        <li>
+                            Зайти в админ-панель магазина и перейти в раздел <span class="badge badge-info">Дополнения &rarr; Доставка</span> и напротив модуля нажать кнопку <span class="text-success">«Установить»</span>
+                        </li>
+                        <li>Перейти в раздел <span class="badge badge-info">Дополнения &rarr; Установка дополнений</span> и загрузить необходимый модификатор из папки <span class="badge badge-info">modification</span>. Перейти в раздел <span class="badge badge-info">Дополнения &rarr; Менеджер дополнений</span> и нажать кнопку <span class="text-success">«Обновить»</span>. <span class="badge badge-danger">Для версий 1.5.Х.Х</span> загрузить необходимые модификаторы нужно на сервер в папку <span class="badge badge-info">vqmod/xml/</span> Подробнее о модификаторах в разделе <a href="#setting" class="badge badge-primary link-goto">Настройка</a></li>
+                        <li>
+                            Перейти к редактированию настроек модуля и активировать лицензию
+                            <div class="alert alert-success" role="alert">
+                                <i class="far fa-envelope"></i> После отправки данных о покупке должно появиться сообщение о том, что данные были успешно отправлены!
+                            </div>
+                            <div class="alert alert-success" role="alert">
+                                <i class="fas fa-key"></i> После активации лицензии должно появиться подтверждающее сообщение!
+                            </div>
+                        </li>
+                        <li>
+                            На вкладке «Основные» в поле «Ключ API» вставьте ключ доступа к API Новой Почты, который Вы можете найти в личном кабинете на сайте компании «Новая Почта» (novaposhta.ua) в разделе <span class="badge badge-info">Настройки &rarr; Безопасность &rarr; Мои ключи API</span>
+                        </li>
+                        <li>Откройте выпадающий список рядом с кнопкой сохранения настроек и загрузите базовые настройки</li>
+                        <li>Задайте необходимые настройки на всех вкладках</li>
+                        <li>Сохраните нажав <span class="text-success">"Сохранить"</span>. Модуль готов к использованию</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="card bg-light mb-3" id="setting">
+                <div class="card-header">Настройка</div>
+                <div class="card-body">
+                    <p>
+                        Данный модуль позволяет обеспечить гибкую совместимость практически со всеми модулями оформления заказов и шаблонами OpenCart благодаря соответствующим модификаторам. Подгрузка всех адресов происходит лишь при выбранном способе доставки. Для полноценной работы модуля на странице оформления заказа должны выполнятся минимальные требования для полей адреса доставки:
+                    </p>
+                    <ul>
+                        <li>Город (<u>city</u>) - обычное текстовое поле</li>
+                        <li>Адрес/Отделение Новой Почты (<u>address_1</u>) - обычное текстовое поле</li>
+                        <li>изменение поля город должно вызывать обновление способа доставки для отображения стоимости и срока доставки</li>
+                    </ul>
+
+                    <h6>Описание модификаторов:</h6>
+
+                    <div class="alert alert-warning" role="alert">
+                        <i class="fas fa-exclamation-triangle"></i> Ставьте только необходимые модификаторы!
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <code>shippingdata_admin</code> – обязательный модификатор необходимый для расширения функционала в админ-панеле.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <code>shippingdata_ajax_quick_checkout</code> – модификатор обеспечивает совместимость с модулем оформления заказов <u>Ajax Quick Checkout</u>. Дополнительная настройка не требуется. Возможно потребуется адаптация для конкретных версий.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <code>shippingdata_default_checkout</code> – модификатор обеспечивает совместимость со стандартной формой заказа. Дополнительная настройка не требуется. Модификатор заменяет поле "Компания" в адресе на <u>checkbox</u> с возможностью выбрать заранее доставку. Если <u>checkbox</u> отмечен, то в полях город и адрес подгружаются списки городов и отделений соответственно.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <code>shippingdata_journal_quick_checkout</code> – модификатор обеспечивает совместимость с шаблоном Journal и его встроенным модулем оформления заказов <u>Quick Checkout</u>. Дополнительная настройка не требуется. Возможно потребуется адаптация для конкретных версий.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <code>shippingdata_octemplates_fastorder</code> – модификатор обеспечивает совместимость с модулем оформления заказов <u>Fast order</u>. Дополнительная настройка не требуется. Возможно потребуется адаптация для конкретных версий.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <code>shippingdata_orderpro</code> – модификатор обеспечивает совместимость с модулем редактирования заказов <u>Order Pro</u>. Возможно потребуется адаптация для конкретных версий.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <code>shippingdata_quick_checkout</code> – модификатор обеспечивает совместимость с модулем оформления заказов <u>Quick checkout</u>. Дополнительная настройка не требуется. Возможно потребуется адаптация для конкретных версий.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <code>shippingdata_rev_checkout</code> – модификатор обеспечивает совместимость с модулем оформления заказов <u>Revolution Checkout</u>. Дополнительная настройка не требуется. Возможно потребуется адаптация для конкретных версий.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <code>shippingdata_simple</code> – модификатор обеспечивает совместимость с модулем оформления заказов и регистрации <u><a href="https://opencartforum.com/files/file/324-modul-simple-uproschennaya-registraciya-i-zakaz/" role="button" target="_blank">Simple</a></u>. Есть два варианта настройки:
+                            <ol>
+                                <li>Отображение города и отделения в виде простых текстовых полей с подгрузкой выпадающих списков. Чтобы настроить достаточно для полей city и address_1 в настройках модуля Simple включить перезагрузку и вывести соответствующие поля в блоке адрес доставки</li>
+                                <li>Отображение города и отделения в виде выпадающих списков select. Данный способ совместимости доступен для версий <u>Simple</u> в которых возможно настроить получение значений вызовом метода из <u>catalog/model/tool/simpleapimain.php</u> или <u>catalog/model/tool/simpleapicustom.php</u>.
+                                    <p>
+                                        <strong>Настройка:</strong>
+                                        <ul>
+                                            <li>после установки модификатора <u>shippingdata_simple</u> зайдите в настройки модуля <u>Simple</u> и выберите раздел "Поля"</li>
+                                            <li>для поля выбора города установите следующие настройки:
+                                                <ul>
+                                                    <li>тип – select</li>
+                                                    <li>Список значений – Получать вызовом метода в API модуля (catalog/model/tool/simpleapimain.php) или (catalog/model/tool/simpleapicustom.php)</li>
+                                                    <li>Название метода в API модуля – getShippingCities</li>
+                                                    <li>Передавать в метод значение другого поля – Регион</li>
+                                                </ul>
+                                            </li>
+                                            <li>для поля выбора отделения Новой Почты установите следующие настройки:
+                                                <ul>
+                                                    <li>тип – select</li>
+                                                    <li>Список значений – Получать вызовом метода в API модуля (catalog/model/tool/simpleapimain.php) или (catalog/model/tool/simpleapicustom.php)</li>
+                                                    <li>Название метода в API модуля – getShippingDepartments</li>
+                                                    <li>Передавать в метод значение другого поля – Город</li>
+                                                </ul>
+                                            </li>
+                                            <li>для поля выбора почтомата Новой Почты установите следующие настройки:
+                                                <ul>
+                                                    <li>тип – select</li>
+                                                    <li>Список значений – Получать вызовом метода в API модуля (catalog/model/tool/simpleapimain.php) или (catalog/model/tool/simpleapicustom.php)</li>
+                                                    <li>Название метода в API модуля – getShippingPoshtomats</li>
+                                                    <li>Передавать в метод значение другого поля – Город</li>
+                                                </ul>
+                                            </li>
+                                            <li>все остальные настройки являются стандартными. Названия полей могут отличаться</li>
+                                        </ul>
+                                        для полей также нужно включить перезагрузку блоков при изминении полей в настройках блока адреса доставки
+                                    </p>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <code>shippingdata_simple_v_2.X.X / shippingdata_simple_v_3.X.X</code> – модификатор обеспечивает совместимость с модулем оформления заказов <u><a href="https://opencartforum.com/files/file/324-modul-simple-uproschennaya-registraciya-i-zakaz/" role="button" target="_blank">Simple</a></u> соответствующих версий. Для полей <u>city</u> и <u>address_1</u> в настройках нужно включить перезагрузку. Возможно потребуется адаптация для конкретных версий.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <code>shippingdata_uni_checkout</code> – модификатор обеспечивает совместимость с модулем оформления заказов <u>Uni Checkout</u>. Дополнительная настройка не требуется. Возможно потребуется адаптация для конкретных версий.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card bg-light mb-3" id="update">
+                <div class="card-header">Обновление</div>
+                <div class="card-body">
+                    <div class="alert alert-danger" role="alert">
+                        <i class="fas fa-exclamation-triangle"></i> Перед обновлением сделайте бэкап настроек и файлов модуля!
+                    </div>
+                    <div class="alert alert-info" role="alert">
+                        <i class="fas fa-sync"></i> Список областей, городов, отделений и справочников обновляется в любое удобное время и необходимое количество раз через админ-панель модуля
+                    </div>
+
+                    <kbd>Обновление с любой версии на последнюю:</kbd>
+                    <ol>
+                        <li>Зайти в админ-панель магазина</li>
+                        <li>Перейти к редактированию модуля и сделать экспорт настроек (выпадающее меню возле кнопки <span class="text-primary">«Сохранить»</span>)</li>
+                        <li>Перейти в раздел <span class="badge badge-info">Дополнения &rarr; Доставка</span> и напротив модуля нажмите кнопку <span class="text-danger">«Удалить»</span></li>
+                        <li>Загрузить используя FTP менеджер содержимое папки <span class="badge badge-info">upload</span> в корень сайта с заменой</li>
+                        <li>Загрузить новые модификаторы <span class="badge badge-pill badge-danger">предварительно удалив все старые (Shipping Data ...)</span> и обновить кэш модификаторов (нажать <span class="text-success">«Обновить»</span>). Подробнее о модификаторах в разделе <a href="#setting" class="badge badge-primary link-goto">Настройка</a></li>
+                        <li>Перейти в раздел <span class="badge badge-info">Дополнения &rarr; Доставка</span> и напротив модуля нажмите кнопку <span class="text-success">«Установить»</span></li>
+                        <li>Перейти к редактированию настроек модуля и на вкладке «Основные» в поле «Ключ API» вставьте ключ доступа к API Новой Почты</li>
+                        <li>После загрузки базы данных сделать импорт ранее сохраненных настроек (выпадающее меню возле кнопки <span class="text-primary">«Сохранить»</span>)</li>
+                        <li>Проверить корректность всех настроек и нажать кнопку <span class="text-primary">«Сохранить»</span></li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="card bg-light mb-3" id="remove">
+                <div class="card-header">Удаление</div>
+                <div class="card-body">
+                    <ol>
+                        <li>Зайти в админ-панель магазина</li>
+                        <li>Перейти в раздел <span class="badge badge-info">Дополнения &rarr; Менеджер дополнений</span> и удалить установленные модификаторы модуля (отметить и нажать <span class="text-danger">«Удалить»</span>), после чего необходимо обновить кэш модификаторов (нажать <span class="text-success">«Обновить»</span>)</li>
+                        <li>Перейти в раздел <span class="badge badge-info">Дополнения &rarr; Доставка</span> и напротив модуля нажать кнопку <span class="text-danger">«Удалить»</span> (произойдет удаление информации о модуле с базы)</li>
+                        <li>Удалить файлы модуля с сервера используя FTP менеджер</li>
+                    </ol>
+                </div>
+            </div>
+
+            <h2>
+                Поддержка
+                <small class="text-muted">(вопросы/ответы, список изменений, контакты)</small>
+            </h2>
+
+            <div class="card bg-light mb-3" id="faq">
+                <div class="card-header">Вопросы/Ответы</div>
+                <div class="card-body">
+                    <div id="fag-accordion" data-children=".item">
+                        <div class="item">
+                            <a data-toggle="collapse" data-parent="#fag-accordion" href="#fag-accordion-1" aria-expanded="true" aria-controls="fag-accordion-1">Как получить лицензию?</a>
+                            <div id="fag-accordion-1" class="collapse" role="tabpanel">
+                                <p class="mb-3">
+                                    Следуя инструкции, установите расширение на домен для которого хотите получить лицензию. Далее Вам необходимо зайти в настройки модуля, заполнить и отправить информацию о покупке. После проверки покупки Вам на почту придет  ключ активации.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <a data-toggle="collapse" data-parent="#fag-accordion" href="#fag-accordion-2" aria-expanded="true" aria-controls="fag-accordion-2">Как получить лицензию на тестовый сайт или поддомен?</a>
+                            <div id="fag-accordion-2" class="collapse" role="tabpanel">
+                                <p class="mb-3">
+                                    Для тестовых сайтов и поддоменов ключ предоставляется бесплатно. Процедура получения для тестового сайта такая же, как и при получении ключа для основного домена.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <a data-toggle="collapse" data-parent="#fag-accordion" href="#fag-accordion-3" aria-expanded="true" aria-controls="fag-accordion-3">После установки модуля не загружаются данные на вкладке "База данных", что делать?</a>
+                            <div id="fag-accordion-3" class="collapse" role="tabpanel">
+                                <p class="mb-3">
+                                    <ul>
+                                        <li>проверьте правильность ввода ключа API Новой Почты</li>
+                                        <li>возможно, закончился срок действия ключа API Новой Почты</li>
+                                        <li>возможно, не хватает ресурсов Вашего сервера или включены какие-то ограничения</li>
+                                        <li>есть вероятность того, что во время первой установки у Вас возникли ошибки, в таком случае таблицы в базе данных не создались. Решение: нажать Удалить/Установить напротив модуля Новой Почты</li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <a data-toggle="collapse" data-parent="#fag-accordion" href="#fag-accordion-4" aria-expanded="true" aria-controls="fag-accordion-4">Как установить модуль если до этого стоял другой модуль доставки Новой Почтой?</a>
+                            <div id="fag-accordion-4" class="collapse" role="tabpanel">
+                                <p class="mb-3">
+                                    Нужно сделать следующие действия (перед всеми манипуляциями необходимо сделать backup базы данных):
+                                    <ol>
+                                        <li>Удалить старый модуль через админ-панель магазина, также при возможности нужно удалить файлы этого модуля с сервера</li>
+                                        <li>Установить новый модуль согласно инструкции</li>
+                                        <li>
+                                            Зайти в админ-панель магазина и перейти в раздел <span class="badge badge-info">Система &rarr; Инструменты &rarr; Бэкап / Восстановление</span> и загрузить файл <span class="badge badge-secondary">recovery_zone_and_country_tables_ru.sql</span> или <span class="badge badge-secondary">recovery_zone_and_country_tables_ua.sql</span>, предварительно выбрав его в архиве модуля в папке <span class="badge badge-info">extra</span> и нажав  "Восстановить" (обратите внимание на префикс для таблиц в Вашей базе, в предоставленном файле префикс для таблиц стандартный - <strong>oc_</strong>)
+                                        </li>
+                                    </ol>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <a data-toggle="collapse" data-parent="#fag-accordion" href="#fag-accordion-5" aria-expanded="true" aria-controls="fag-accordion-5">Fatal error: The file ... cannot be decoded by this version of the ionCube Loader. If you are the administrator of this site then please install the latest version of the ionCube Loader</a>
+                            <div id="fag-accordion-5" class="collapse" role="tabpanel">
+                                <p class="mb-3">
+                                    Обновите версию ionCube Loader
+                                </p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <a data-toggle="collapse" data-parent="#fag-accordion" href="#fag-accordion-6" aria-expanded="true" aria-controls="fag-accordion-6">Site error: the file ... requires the ionCube PHP Loader ioncube_loader_lin_5.4.so to be installed by the website operator. If you are the website operator please use the ionCube Loader Wizard to assist with installation.</a>
+                            <div id="fag-accordion-6" class="collapse" role="tabpanel">
+                                <p class="mb-3">
+                                    Установите/активируйте бесплатную библиотеку ionCube Loader на своем сервере/хостинге. Если, к примеру в php_info, будет отображаться информация о том что библиотека установлена, а ошибка не пропадет - значит Вы не правильно установили ionCube Loader
+                                </p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <a data-toggle="collapse" data-parent="#fag-accordion" href="#fag-accordion-7" aria-expanded="true" aria-controls="fag-accordion-7">Во время установки появляется ошибка "Страница не найдена" или 500 (Internal Server Error) или белая страница</a>
+                            <div id="fag-accordion-7" class="collapse" role="tabpanel">
+                                <p class="mb-3">
+                                    <ul>
+                                        <li>проверьте, загрузились ли все файлы модуля на сервер в корневую директорию Вашего интернет-магазина</li>
+                                        <li>проверьте, соответствуют ли параметры Вашего сервера требованиям модуля</li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <a data-toggle="collapse" data-parent="#fag-accordion" href="#fag-accordion-8" aria-expanded="true" aria-controls="fag-accordion-8">Модуль не считает стоимость доставки</a>
+                            <div id="fag-accordion-8" class="collapse" role="tabpanel">
+                                <p class="mb-3">
+                                    <ul>
+                                        <li>проверьте, нет ли ошибок в логах модификаторов</li>
+                                        <li>проверьте, установлен ли переключатель "Стоимость доставки" в положение "Да"</li>
+                                        <li>проверьте "Бесплатную доставку от", возможно сумма в вашей корзине больше или равна чем сумма для бесплатной доставки</li>
+                                        <li>проверьте вес товара в корзине. Если вес отсутствует в карточке товара, то можно задать значение по умолчанию в настройках модуля</li>
+                                        <li>проверьте настройки модуля, а также корректность города получателя</li>
+                                        <li>иногда некоторые методы API почтовой компании не доступны, в таком случае можно включить тарифный расчет в настройках модуля для отображения примерной стоимости доставки или подождать восстановления работоспособности API</li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <a data-toggle="collapse" data-parent="#fag-accordion" href="#fag-accordion-9" aria-expanded="true" aria-controls="fag-accordion-9">Модуль не считает срок доставки</a>
+                            <div id="fag-accordion-9" class="collapse" role="tabpanel">
+                                <p class="mb-3">
+                                    <ul>
+                                        <li>проверьте, нет ли ошибок в логах модификаторов</li>
+                                        <li>проверьте, установлен ли переключатель "Срок доставки" в положение "Да"</li>
+                                        <li>проверьте настройки модуля, а также корректность города получателя</li>
+                                        <li>иногда некоторые методы API почтовой компании не доступны, в таком случае нужно подождать восстановления работоспособности API</li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <a data-toggle="collapse" data-parent="#fag-accordion" href="#fag-accordion-10" aria-expanded="true" aria-controls="fag-accordion-10">Для чего нужны файлы recovery_zone_and_country_tables_ru.sql и recovery_zone_and_country_tables_ua.sql ? Где взять правильные названия стран и областей?</a>
+                            <div id="fag-accordion-10" class="collapse" role="tabpanel">
+                                <p class="mb-3">
+                                    <ul>
+                                        В папке <span class="badge badge-info">extra</span> есть дамп стран и областей <span class="badge badge-secondary">recovery_zone_and_country_tables_ru.sql</span> и <span class="badge badge-secondary">recovery_zone_and_country_tables_ua.sql</span> с правильными названиями для Украины, на русском и украинском языках соответственно. Загружать их необходимо через админ-панель магазина в разделе <span class="badge badge-info">Система &rarr; Инструменты &rarr; Бэкап / Восстановление</span> предварительно проверив префиксы таблиц, в файлах они <b>oc_</b>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <a data-toggle="collapse" data-parent="#fag-accordion" href="#fag-accordion-11" aria-expanded="true" aria-controls="fag-accordion-11">Как создать накладную?</a>
+                            <div id="fag-accordion-11" class="collapse" role="tabpanel">
+                                <p class="mb-3">
+                                    Если при оформлении заказа был выбран совместимый способ доставки, то при просмотре списка заказов или конкретного заказа будет доступна кнопка для работы с накладной. Также при просмотре списка заказов будет кнопка для перехода к списку накладных.
+                                </p>
+                                <figure class="figure">
+                                    <img src="https://oc-max.com/docs/novaposhta/images/ru/i_orders.png" class="img-thumbnail" alt="Интеграция с накладными при просмотре списка заказов">
+                                    <figcaption class="figure-caption text-right">Интеграция с накладными при просмотре списка заказов</figcaption>
+                                </figure>
+                                <figure class="figure">
+                                    <img src="https://oc-max.com/docs/novaposhta/images/ru/i_order.png" class="img-thumbnail" alt="Интеграция с накладными при просмотре конкретного заказа">
+                                    <figcaption class="figure-caption text-right">Интеграция с накладными при просмотре конкретного заказа</figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <a data-toggle="collapse" data-parent="#fag-accordion" href="#fag-accordion-12" aria-expanded="true" aria-controls="fag-accordion-12">Как настроить отслеживание?</a>
+                            <div id="fag-accordion-12" class="collapse" role="tabpanel">
+                                <p class="mb-3">
+                                    Отслеживание в модуле осуществляется через соответствующие методы API интерфейса Новой Почты. Всё работает по принципу смены статусов. Для лучшего понимания рассмотрим работу и настройку на конкретном примере. Допустим нам необходимо отправлять уведомление клиенту с номером накладной когда заказ будет отправлен и завершить сделку установив соответствующий статус "Сделка завершена".
+                                    <ol>
+                                        <li>Для начала необходимо настроить Cron используя команду в модуле. Команда Cron дана для примера и для разных хостингов может отличаться. Интервал отслеживания, к примеру, каждый час.
+                                            <figure class="figure">
+                                                <img src="https://oc-max.com/docs/novaposhta/images/ru/i_cron_tracking.png" class="img-thumbnail" alt="Команда Cron для отслеживания">
+                                                <figcaption class="figure-caption text-right">Команда Cron для отслеживания</figcaption>
+                                            </figure>
+                                        </li>
+                                        <li>Укажите статусы Вашего интернет-магазина которые будут отслеживаться. Модуль будет отслеживать заказы с теми статусами, которые Вы отметите и для которых будет создана накладная. Для нашего примера это "В обработке" и "Отправлено".
+                                        </li>
+                                        <li>Настройте соответствие между статусами Новой Почты и статусами Вашего интернет-магазина. Модуль сверяет текущий статус отправления с соответствующим ему статусом интернет-магазина, если статус заказа не совпадает - модуль меняет на новый. Для нашего примера модуль будет работать следующий образом:
+                                            <ol>
+                                                <li>Выбирает все заказы у которых присутствует номер накладной и статус соответствует "В обработке" и "Отправлено"</li>
+                                                <li>Отслеживает выбранные заказы по номеру накладной</li>
+                                                <li>Если у конкретного заказа статус интернет-магазина "В обработке", а статус в системе Новой Почты стал "Відправлено", то модуль меняет статус в интернет-магазине на "Отправлено"</li>
+                                                <li>Если у конкретного заказа статус интернет-магазина "Отправлено" или "В обработке", а статус в системе Новой Почты стал "Одержаний", то модуль меняет статус в интернет-магазине на "Сделка завершена"</li>
+                                            </ol>
+                                            <figure class="figure">
+                                                <img src="https://oc-max.com/docs/novaposhta/images/ru/i_tracking_statuses_settings.png" class="img-thumbnail" alt="Настройка статусов">
+                                                <figcaption class="figure-caption text-right">Настройка статусов</figcaption>
+                                            </figure>
+                                        </li>
+                                    </ol>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card bg-light mb-3" id="changelog">
+                <div class="card-header">Список изменений</div>
+                <div class="card-body">
+                    <kbd>v. 3.5.0 от 14.11.2020:</kbd>
+                    <ul>
+                        <li>добавлена доставка в почтомат, как способ доставки</li>
+                        <li>добавлена возможность настройки cURL таймаутов</li>
+                        <li>добавлена поддержка мультимагазинов при создании ТТН</li>
+                        <li>оптимизировано обновление базы данных</li>
+                        <li>обновлены и добавлены модификаторы</li>
+                        <li>обновлен подсчет итогов</li>
+                        <li>исправлена ошибка постраничной навигации в списке накладных</li>
+                        <li>исправлена ошибка загрузки городов без названий</li>
+                        <li>исправлена ошибка выбора некоторых отделений</li>
+                        <li>исправлена ошибка подсчета бесплатной доставки</li>
+                        <li>исправлены ошибки в справочниках</li>
+                        <li>исправлены ошибки совместимости</li>
+                        <li>другие исправления ошибок, мелкие правки и улучшения</li>
+                    </ul>
+
+                    <kbd>v. 3.4.1 от 27.07.2019:</kbd>
+                    <ul>
+                        <li>добавлена возможность печати маркировок типа "Зебра" 100х100</li>
+                        <li>добавлен макрос zone_id</li>
+                        <li>увеличены лимиты на выполнение cURL запросов</li>
+                        <li>улучшена совместимость с рядом дополнений</li>
+                        <li>исправлены ошибки при обновлении городов и отделений</li>
+                        <li>исправлены ошибки при выполнении тарифного расчета стоимости доставки</li>
+                        <li>исправлена валидация объема при создании ТТН</li>
+                        <li>другие исправления ошибок, мелкие правки и улучшения</li>
+                    </ul>
+
+                    <kbd>v. 3.4.0 от 09.04.2019:</kbd>
+                    <ul>
+                        <li>добавлена поддержка мультимагазинов</li>
+                        <li>добавлена автоматическая смена получателя при смене ключа АПИ</li>
+                        <li>добавлена поддержка услуги redBOX</li>
+                        <li>добавлено автозаполнение поля контроль оплаты</li>
+                        <li>добавлена доставка на этаж и опция лифта</li>
+                        <li>добавлен макрос опций товара</li>
+                        <li>добавлен фильтр накладных по номеру</li>
+                        <li>добавлена возможность привязки сторонних накладных к заказам</li>
+                        <li>добавлена возможность привязки своих накладных без временных ограничений</li>
+                        <li>добавлен код статуса к описанию в списке накладных</li>
+                        <li>добавлен мультиязычный поиск городов и отделений в корзине</li>
+                        <li>добавлен расчет срока доставки для тарифного расчета</li>
+                        <li>обновлен список статусов отслеживания</li>
+                        <li>актуализированы все запросы к АПИ</li>
+                        <li>актуализирована структура базы данных</li>
+                        <li>переработано создание и редактирование накладных</li>
+                        <li>переработано обновление базы данных</li>
+                        <li>переработан тарифный расчет</li>
+                        <li>переработан расчет параметров отправления</li>
+                        <li>переработана задержка выполнения при трекинге отправлений</li>
+                        <li>доработаны все модификаторы</li>
+                        <li>исправлена ошибка с отчеством при создании ТТН на адрес</li>
+                        <li>исправлена ошибка определения типа улицы при создании ТТН на адрес</li>
+                        <li>исправлена ошибка оплаты безналом</li>
+                        <li>исправлены ошибки валидации формы ТТН</li>
+                        <li>исправлена ошибка вывода заголовка способов доставки когда они не доступны</li>
+                        <li>исправлены ошибки операций с числами в PHP 7.1 и выше</li>
+                        <li>исправлен ряд ошибок в версии для OpenCart 3</li>
+                        <li>исправлен ряд ошибок в версии для OpenCart 1.5</li>
+                        <li>исправлен ряд ошибок отслеживания отправлений</li>
+                        <li>другие исправления ошибок, мелкие правки и улучшения</li>
+                    </ul>
+
+                    <kbd>v. 3.3.1 от 04.07.2018:</kbd>
+                    <ul>
+                        <li>добавлена совместимость с OpenCart 3</li>
+                        <li>добавлена настройка печати</li>
+                        <li>добавлена поддержка модуля отправки смс "OCHELP - СМС уведомления для админа, клиента"</li>
+                        <li>добавлен лог для отслеживания отправлений</li>
+                        <li>добавлен лог ошибок cURL</li>
+                        <li>добавлено проставление минимальных параметров отправления</li>
+                        <li>добавлено присвоение названия города при оформлении заказа из сессии для совместимости с некоторыми дополнениями</li>
+                        <li>продублированы коды статусов доставки в названии</li>
+                        <li>доработан модификатор интеграции с заказами</li>
+                        <li>создание и удаление таблиц дополнения вынесено в модель</li>
+                        <li>исправлены ошибки связанные с неустановленными модулями оплаты, доставки и модулями учета в заказе</li>
+                        <li>исправлена ошибка с выбором оплаты по безналу при создании ТТН</li>
+                        <li>исправлена ошибка с расчетом параметров отправления при создании ТТН</li>
+                        <li>исправлена ошибка с объявленной стоимостью по умолчанию</li>
+                        <li>исправлена ошибка если не заданы тарифы</li>
+                        <li>исправлен расчет стоимости упаковки</li>
+                        <li>исправлены некоторые макросы при отслеживании</li>
+                        <li>другие исправления ошибок, мелкие правки и улучшения</li>
+                    </ul>
+
+                    <kbd>v. 3.3.0 от 12.12.2017:</kbd>
+                    <ul>
+                        <li>переработано сохранение настроек</li>
+                        <li>переработан тарифный расчет</li>
+                        <li>добавлен экспорт/импорт настроек</li>
+                        <li>добавлена загрузка базовых настроек</li>
+                        <li>переработан интерфейс администратора</li>
+                        <li>исправлены ошибки при редактировании накладной</li>
+                        <li>оптимизированы и приведены в актуальное состояние базы данных</li>
+                        <li>исправлены ошибки при применении ключа API</li>
+                        <li>добавлена возможность выбора нескольких способов оплаты наложенным платежом</li>
+                        <li>добавлено автоматическое определение протокола https</li>
+                        <li>добавлены новые макросы для заказа, товаров и накладных</li>
+                        <li>доработана отправка e-mail уведомлений</li>
+                        <li>переработана конвертация веса и размеров отправления</li>
+                        <li>добавлен учет веса из опций</li>
+                        <li>исправлена ошибка в модификаторе для стандартной корзины</li>
+                        <li>исправлены ошибки при создании накладной</li>
+                        <li>добавлен текст бесплатной доставки для каждого способа доставки (в отделение и курьером)</li>
+                        <li>добавлена возможность использовать дополнительные поля (улица, дома, квартира) для адресной доставки</li>
+                        <li>добавлено автоопределение типа отправления (документ, посылка, груз) и возможность вкл/выкл эту опцию</li>
+                        <li>добавлена возможность выбрать способ расчета объема отправления</li>
+                        <li>добавлен расчет количества мест отправления</li>
+                        <li>добавлена возможность задать количество мест отправления по умолчанию</li>
+                        <li>добавлена возможность задать объявленную стоимость по умолчанию</li>
+                        <li>добавлено автозаполнение для описания отправления в настройках</li>
+                        <li>добавлена возможность задать допуски для размеров отправления (+\- см)</li>
+                        <li>добавлен учет упаковки отправления</li>
+                        <li>добавлен выбор типа упаковки отправления</li>
+                        <li>добавлено автоопределение типа упаковки на основе параметров отправления (вес, размеры)</li>
+                        <li>добавлена вкладка с настройками оплаты (плательщик, форма оплаты, метод оплаты наложенным платежом, плательщик обратной доставки, способ получения денежного перевода, платежная карта)</li>
+                        <li>добавлена возможность выбора отображения всех накладных аккаунта или только привязанных к заказам</li>
+                        <li>добавлена возможность выбора отображаемой информации в списке накладных</li>
+                        <li>добавлена возможность выбора совместимого способ доставки для создания накладных</li>
+                        <li>добавлена возможность задать произвольный способ оплаты, доставки или итоговый модуль</li>
+                        <li>добавлена возможность выбора пунктов меню и задание их названий при интеграции накладных в заказах</li>
+                        <li>добавлены кнопки копирования cron команд</li>
+                        <li>добавлена кнопка ручного запуска отслеживания отправлений</li>
+                        <li>добавлена задержка выполнения смены статусов заказа</li>
+                        <li>добавлена опция вкл/выкл стандартного уведомления клиента о сменен статуса заказа</li>
+                        <li>добавлены мультиязычные шаблоны сообщений</li>
+                        <li>добавлен отдельный шаблон для смс уведомлений</li>
+                        <li>добавлен визуальный редактор для e-mail уведомлений</li>
+                        <li>переработана интеграция накладных с заказами</li>
+                        <li>добавлена привязка накладной к заказу</li>
+                        <li>добавлено удаление накладной из заказа</li>
+                        <li>добавлен автопоиск адреса отправителя</li>
+                        <li>переработано определение типа адреса получателя</li>
+                        <li>переработано создание накладных на адрес</li>
+                        <li>переработан поиск населенных пунктов и улиц получателя</li>
+                        <li>добавлен выбор способа получения наложенного платежа при создании накладной</li>
+                        <li>добавлен выбор карты получения наложенного платежа при создании накладной</li>
+                        <li>добавлена возможность указать номер упаковки при создании накладной</li>
+                        <li>добавлен выбор допустимого веса при создании накладной для отправки документов</li>
+                        <li>исправлена ошибка создания юридических лиц получателей</li>
+                        <li>исправлена ошибка создания накладных для посылок с доставкой в почтоматы</li>
+                        <li>добавлен фильтр не забранных и накладных с обратной доставкой в списке</li>
+                        <li>добавлена подсветка распечатанных и удаленных накладных в списке</li>
+                        <li>переработана печать накладных и маркировок</li>
+                        <li>добавлены мультиязычные ошибки, возвращаемые почтовой компанией</li>
+                        <li>добавлена загрузка справочников ошибок и типов контрагентов</li>
+                        <li>добавлена возможность выбора города без указания области при оформлении заказа</li>
+                        <li>добавлена первоначальная подгрузка крупных городов если не указана область</li>
+                        <li>переработан поиск городов и отделений при оформлении заказа</li>
+                        <li>множество других исправлений ошибок, мелких правок и улучшений</li>
+                    </ul>
+                    <kbd>v. 3.2 от 30.10.2016:</kbd>
+                    <ul>
+                        <li>добавлена совместимость с OpenCart 2.3</li>
+                        <li>добавлено разделение настроек для доставки в отделение и курьером</li>
+                        <li>добавлен отладочный режим</li>
+                        <li>добавлена проверка ключа API при добавлении/изменении в настройках</li>
+                        <li>добавлена автоматическая первичная загрузка базы данных при первом внесении ключа API</li>
+                        <li>добавлена автоматическая загрузка данных отправителя при смене ключа API</li>
+                        <li>добавлена загрузка логотипа почтовой компании и возможность указать место отображения</li>
+                        <li>добавлена возможность задать мультиязычный текст который будет отображаться вместо стоимости в случае бесплатной доставки</li>
+                        <li>добавлена возможность задать верхнюю и нижнюю границу суммы в корзине, при которой будет доступен способ оплаты</li>
+                        <li>добавлена возможность задать макрос для определения области получателя</li>
+                        <li>добавлена возможность задать разные поля для доставки на адрес и в отделение</li>
+                        <li>добавлена возможность задать желаемые дату и время доставки для клиента</li>
+                        <li>добавлен выбор типа отправления в настройках</li>
+                        <li>добавлен выбор составляющих объявленной стоимости отправления</li>
+                        <li>добавлен просмотр накладных за определенный промежуток времени</li>
+                        <li>добавлен помимо автоматического и ручной выбор типа доставки при создании ЭН</li>
+                        <li>добавлен выбор области при создании ЭН на адрес</li>
+                        <li>добавлен поиск населенных пунктов при создании ЭН на адрес</li>
+                        <li>добавлен удобный поиск отделений при создании ЭН</li>
+                        <li>добавлен поиск улиц при создании ЭН</li>
+                        <li>добавлена возможность создания ЭН для дисков и шин</li>
+                        <li>добавлена возможность корректировки составляющих объявленной стоимости непосредственно перед созданием ЭН</li>
+                        <li>добавлена возможность указать желаемую дату и время доставки при создании ЭН</li>
+                        <li>добавлена загрузка параметров контрагента (получателя)</li>
+                        <li>добавлен опциональный показ и применение контроля оплаты, третьего лица и безналичной оплаты (в зависимости от настроек конкретного отправителя)</li>
+                        <li>добавлено поэтапное отслеживание отправлений, которое позволит обрабатывать более 100 ЭН</li>
+                        <li>добавлена совместимость с модулем накопительных скидок "Клубная программа"</li>
+                        <li>добавлена поддержка пользовательских полей Simple</li>
+                        <li>добавлена поддержка обычных выпадающих списков при оформлении заказа в Simple</li>
+                        <li>добавлена поддержка двух форматов номеров телефона (с 38 и без) при создании ЭН</li>
+                        <li>добавлена поддержка разных кодов украинского языка</li>
+                        <li>исправлен тарифный расчет в соответствии с последними изменениями Новой Почты</li>
+                        <li>переработана полностью модель доставки</li>
+                        <li>переработан вывод сроков доставки с нормальными окончаниями</li>
+                        <li>переработано применение параметров по умолчанию</li>
+                        <li>переработано отслеживание отправлений в соответствии с последними изменениями Новой Почты</li>
+                        <li>исправлены ошибки и улучшена работа при создании ЭН на адрес</li>
+                        <li>исправлено быстрое сохранение настроек модуля</li>
+                        <li>исправлена ошибка обновления справочников</li>
+                        <li>исправлена ошибка загрузки описаний отправления</li>
+                        <li>исправлены ошибки, которые возникали при повторной установке/переустановке модуля</li>
+                        <li>исправлена запись ошибок возвращаемых Новой Почтой</li>
+                        <li>исправлена ошибка загрузки всех накладных</li>
+                        <li>исправлен вывод ошибок при окончании срока действия ключа API</li>
+                        <li>исправлена валидация полей с autocomplete при создании ЭН</li>
+                        <li>исправлена валидация ряда полей при создании ЭН</li>
+                        <li>исправлена ошибка с объявленной стоимостью, когда курс валюты отличался от текущего в момент оформления заказа</li>
+                        <li>упрощена первичная установка модуля</li>
+                        <li>ряд других мелких правок и улучшений</li>
+                    </ul>
+                    <kbd>v. 3.1 от 15.08.2016:</kbd>
+                    <ul>
+                        <li>добавлена совместимость с модулями обработки заказов</li>
+                        <li>добавлен вывод номера заказа в списке накладных</li>
+                        <li>улучшена работа с валютами при создании накладных</li>
+                        <li>исправлено форматирование валюты при просмотре списка накладных</li>
+                        <li>исправлены ошибки в тарифном расчете</li>
+                        <li>исправлены и оптимизированы функции подсчета веса и объема</li>
+                        <li>исправлены ошибки при отслеживании отправлений</li>
+                        <li>исправлены ошибки в интерфейсе администратора</li>
+                    </ul>
+                    <kbd>v. 3.0 от 18.07.2016:</kbd>
+                    <ul>
+                        <li>добавлена доставка курьером Новой Почты на адрес</li>
+                        <li>добавлена возможность настройки данных получателя</li>
+                        <li>добавлена возможность создания накладных с типом доставки Отделение-Адрес, Адрес-Отделение, Адрес-Адрес</li>
+                        <li>добавлена возможность создания накладных с получателем "Юридическое лицо"</li>
+                        <li>добавлено автоматическое создание получателя "Юридическое лицо"</li>
+                        <li>добавлено автоматическое редактирование контактных лиц</li>
+                        <li>добавлен вывод стоимости доставки и объявленной стоимости отправления при просмотре списка накладных</li>
+                        <li>добавлена отвязка накланой от заказа даже если Новая Почта не разрешает удалить экспресс накладную</li>
+                        <li>добавлена удобная кнопка создания и редактирования накладных при просмотре всех заказов</li>
+                        <li>переработан поиск получателей и контактных лиц</li>
+                        <li>переработана валидация некоторых полей</li>
+                        <li>переработано ядро модуля в соответствии с последними изменениями в работе API Новой Почты</li>
+                        <li>исправлен выбор настроек отправителя для частных лиц</li>
+                        <li>исправлены ошибки при выводе списка накладных</li>
+                        <li>исправлены ошибки в кроне</li>
+                        <li>изменены требования к версии PHP, теперь 5.3 и выше</li>
+                        <li>улучшения и доработки в админ интерфейсе</li>
+                    </ul>
+                    <kbd>v. 2.0 от 23.04.2016:</kbd>
+                    <ul>
+                        <li>добавлена поддержка OpenCart v 2.2.0.0</li>
+                        <li>добавлено автоматическое отслеживание отправлений</li>
+                        <li>добавлено автоматическое обновление областей, городов, отделений и справочников Новой Почты</li>
+                        <li>добавлена запись номера и Ref экспресс накладных в заказ</li>
+                        <li>добавлено редактирование экспресс накладных из модуля</li>
+                        <li>добавлено удаление экспресс накладных из модуля</li>
+                        <li>добавлено создание экспресс накладных с "чистого" листа</li>
+                        <li>добавлена возможность задать мультиязычное название для способа доставки</li>
+                        <li>добавлен выбор варианта расчёта стоимости доставки (по API или тарифный) и независимая работа этих способов</li>
+                        <li>добавлена возможность задать тарифную таблицу для определения стоимости доставки</li>
+                        <li>добавлен выбор разных вариантов типов отделения (раньше можно было выбрать только 1)</li>
+                        <li>добавлена возможность задать шаблон с переменными заказа и товаров для поля дополнительного описания отправления</li>
+                        <li>добавлен выбор варианта применения параметров по умолчанию (ко всему заказу или к товарам, у которых не заполнены данные в карточке)</li>
+                        <li>добавлена возможность включения учета объёма отправления для подсчета объёмного веса</li>
+                        <li>добавлена автоматическая конвертация объёма</li>
+                        <li>добавлен учёт объёмного веса для предварительного расчета стоимости доставки</li>
+                        <li>добавлен учёт данных отправителя для предварительного расчета стоимости доставки (персональная скидка и т.д.)</li>
+                        <li>добавлен удобный вывод ошибок, которые возвращает Новая Почта при работе с экспресс накладными</li>
+                        <li>добавлена привязка экспресс накладных к заказам магазина при просмотре списка накладных</li>
+                        <li>добавлен учет купонов и сертификатов</li>
+                        <li>оптимизировано обновление базы данных модуля (скорость обновления выросла в разы)</li>
+                        <li>оптимизированы запросы к API, что позволило сократить количество запросов при работе с накладными и ускорить работу модуля</li>
+                        <li>оптимизирована структура модуля</li>
+                        <li>исправлена работа с третьими лицами</li>
+                        <li>исправлен фильтр просмотра списка экспресс накладных</li>
+                        <li>исправлена валидация формы ЭН</li>
+                        <li>исправлены мелкие ошибки при работе с базой данных модуля</li>
+                        <li>доработана конвертация валют</li>
+                        <li>исправлены ошибки при конвертации веса</li>
+                        <li>исправлена пагинация при просмотре всех накладных</li>
+                        <li>оптимизация скриптов модуля в том числе js</li>
+                        <li>улучшения и доработки в админ интерфейсе</li>
+                    </ul>
+                    <kbd>v. 1.3.0 от 25.02.2016:</kbd>
+                    <ul>
+                        <li>изменены требования к Ioncube Loader, теперь необходимая версия 5 и выше. Изменения с целью обеспечения совместимости с последними версиями PHP</li>
+                        <li>добавлена совместимость с модулем "Наложенный платеж +"</li>
+                        <li>исправлены ошибки при валидации контактного лица получателя</li>
+                        <li>исправлены ошибки в запросах при выборе некоторых адресов</li>
+                        <li>доработки по ядру модуля</li>
+                    </ul>
+                    <kbd>v. 1.2.0 от 19.02.2016:</kbd>
+                    <ul>
+                        <li>полностью переделан front-end модуля, что позволило добавить новый функционал и стабильность работы</li>
+                        <li>добавлены функции поиска для полей города и отделения при оформлении заказов</li>
+                        <li>исправлена сортировка городов и отделений</li>
+                        <li>добавлена поддержка IE при выборе адреса доставки</li>
+                        <li>изменен принцип взаимодействия с регионами OpenCart, теперь модуль сам подстраивается к уже существующим регионам и не вносит изменения в таблицу zone</li>
+                        <li>добавлена поддержка модуля оплаты наложенным платежом при создании Экспресс Накладной</li>
+                        <li>добавлена автоматическая конвертация веса товаров</li>
+                        <li>добавлен фильтр отделений по весу</li>
+                        <li>добавлен выбор типа отделений</li>
+                        <li>добавлена поддержка работы с юридическими лицами при создании Экспресс Накладной</li>
+                        <li>добавлена возможность указать третье лицо в качестве плательщика при создании Экспресс Накладной</li>
+                        <li>добавлен контроль оплаты при создании Экспресс Накладной</li>
+                        <li>добавлена возможность задать параметры каждого места отправления</li>
+                        <li>добавлена возможность изменять отправителя непосредственно в форме создания ЭН</li>
+                        <li>убраны ошибки при установке модуля</li>
+                        <li>убраны ошибки при просмотре заказа</li>
+                        <li>исправлена валидация ФИО (ё, -)</li>
+                        <li>исправлена валидация адреса доставки если язык админки и заказа не совпадают</li>
+                        <li>исправлены методы расчета общего веса и объема при создании ЭН</li>
+                        <li>исправлена ошибка при создании ЭН с отправкой документа в почтомат</li>
+                        <li>добавлена совместимость с некоторыми сторонними модулями</li>
+                        <li>оптимизация кода (php, js) и запросов к API Новой Почты</li>
+                        <li>исправление ошибок и улучшение в интерфейсе модуля</li>
+                        <li>+ много мелких доработок</li>
+                    </ul>
+                    <kbd>v. 1.1.0 от 09.11.2015:</kbd>
+                    <ul>
+                        <li>добавлено создание экспресс накладных при отправке в почтомат</li>
+                        <li>добавлено создание экспресс накладных с типом груза "Документы"</li>
+                        <li>добавлено поле внутреннего заказа клиента при создании ЭН</li>
+                        <li>добавлено поле дополнительного описания отправления при создании ЭН</li>
+                        <li>справочники перенесены из кэша в отдельную таблицу модуля</li>
+                        <li>исправлена ошибка при создании получателя если были лишние пробелы</li>
+                        <li>добавлено описание отправления по умолчанию</li>
+                        <li>добавлен переход к списку созданной экспресс накладной и ее подсветкой</li>
+                        <li>добавлен автоматический выбор плательщика отправителя при создании ЭН в случае если доставка бесплатная</li>
+                        <li>добавлен тарифный расчет (тариф для посылок) в случае недоступности API</li>
+                        <li>оптимизация модели front-end`а доставки</li>
+                        <li>убраны найденные ошибки при запросах к API</li>
+                        <li>исправлена бесплатная доставка от суммы заказа</li>
+                        <li>исправлены валютные корректировки используемые в модуле</li>
+                        <li>изминения в интерфейсе модуля</li>
+                        <li>другие доработки и правки по устранению ошибок и улучшению удобства модуля. Всего выполнено более 20 пунктов</li>
+                    </ul>
+                    <kbd>v. 1.0.0 от 24.10.2015:</kbd>
+                    <ul>
+                        <li>модуль на 90% переписан</li>
+                        <li>оптимизирован код</li>
+                        <li>добавлено кэширование некоторых данных</li>
+                        <li>добавлена поддержка OpenCart 2.1.0.1</li>
+                        <li>добавлен функционал для работы с Экспресс Накладными</li>
+                        <li>формат обмена данными через API сменен с xml на json</li>
+                        <li>добавлена загрузка справочной информации "Новой Почты"</li>
+                        <li>добавлено отображение информации о существующем и добавленном количестве на вкладке "База данных"</li>
+                        <li>добавлена поддержка мультивалютного отображения стоимости доставки</li>
+                        <li>при 0 значении стоимости доставки убрано отображение 0.00 грн</li>
+                        <li>исправлена ошибка с "Бесплатной доставкой от", когда доставка была всегда бесплатной если не указать значение для этой настройки</li>
+                        <li>если вес товара не указан в карточке и в настройках модуля, то стоимость доставки не считается  (как следствие убрано несколько ошибок)</li>
+                        <li>исправлено визуальное подвисание при не работающем обновлении информации на вкладке "База данных"</li>
+                        <li>исправлена ошибка с выбором некоторых отделений</li>
+                        <li>добавлена запись в логи ошибок возвращенных методами API "Новой Почты"</li>
+                        <li>исправлена ошибка с отключением областей сразу после установки модуля</li>
+                        <li>внесены изменения в модификаторы</li>
+                        <li>модификатор для Short Checkout изъят на доработку</li>
+                        <li>исправлены ошибки при отправке данных о покупке</li>
+                        <li>визуальные улучшения админ-панели модуля</li>
+                        <li> и много других исправлений и доработок, которые обеспечивают более стабильную работу модуля</li>
+                    </ul>
+                    <kbd>v. 0.2.5 от 20.08.2015:</kbd>
+                    <ul>
+                        <li>исправлена ошибка при выборе почтоматов Новой Почты</li>
+                        <li>добавлена поддержка модуля оформления заказов Journal 2 Quick Checkout</li>
+                        <li>добавлена поддержка модуля оформления заказов Short Checkout</li>
+                        <li>немного усовершенствованы модификаторы совместимости с модулями оформления заказов</li>
+                        <li>добавлен английский язык (пока быстрый машинный перевод)</li>
+                        <li>добавлен дамп восстановления стандартных данных для таблиц country и zone</li>
+                        <li>добавлена новая, удобная и понятная документация по модулю</li>
+                    </ul>
+                    <kbd>v. 0.2.0 от 21.07.2015:</kbd>
+                    <ul>
+                        <li>добавлен хак позволяющий обеспечить совместимость с разными модулями оформления заказов</li>
+                        <li>добавлена поддержка модуля оформления заказов Ajax Quick Checkout</li>
+                        <li>добавлена поддержка ранних версий модуля оформления заказов Simple checkout & Registration</li>
+                        <li>добавлен timeout на случай недоступности серверов Новой Почты</li>
+                        <li>снижены требования для Ioncube Loader</li>
+                        <li>исправлены все заявленные/найденные ошибки</li>
+                    </ul>
+                    <kbd>v. 0.1.3 от 30.06.2015:</kbd>
+                    <ul>
+                        <li>добавлена возможность устанавливать минимальную сумму покупок при которой доставка будет бесплатной</li>
+                        <li>внесены изменения в модификатор стандартной формы оформления заказа</li>
+                        <li>добавлена кнопка "Сохранить и остаться" для упрощения первичной настройки модуля и дальнейшего редактирования</li>
+                        <li>исправлены все обнаруженные ошибки</li>
+                    </ul>
+                    <kbd>v. 0.1.0 от 22.06.2015:</kbd>
+                    <ul>
+                        <li>первый выпуск</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card bg-light mb-3" id="contacts">
+                <div class="card-header">Контакты</div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li><i class="fab fa-skype"></i> <a href="skype:oc.max?chat">oc.max</a></li>
+                        <li><i class="far fa-envelope"></i> <a href="mailto:#">ocmax.helper@gmail.com</a></li>
+                        <li><i class="fas fa-external-link-alt"></i> <a href="https://oc-max.com">oc-max.com</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <script type="text/javascript"><!--
+            $(function() {
+                $('.link-goto').on('click', function () {
+                    event.preventDefault();
+
+                    var id = $(this).attr('href');
+
+                    $('html, body').animate({scrollTop: $(id).offset().top - 70}, 1500);
+                } );
+
+                var mark = function() {
+                    var keyword = $('#input-text_to_find').val();
+
+                    console.log(keyword);
+
+                    var options = {
+                        'className': 'badge badge-warning',
+                        'separateWordSearch': false
+                    };
+
+                    $('.container-fluid').not('nav').unmark({
+                        done: function() {
+                            $('.container-fluid').not('nav').mark(keyword, options);
+                        }
+                    } );
+
+                    $('html, body').animate({scrollTop: $('mark:first').offset().top - 70}, 1500);
+                };
+
+                $('#button-search').on('click', mark);
+
+                $('#input-text_to_find').on('change', function() {
+                    if (!this.value) {
+                        $('.container-fluid').not('nav').unmark();
+                    }
+                } );
+
+            } );
+            //--></script>
+        </div>
+    </body>
+</html>
